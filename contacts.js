@@ -28,7 +28,7 @@ const addContact = async (name, email, phone) => {
   const data = await listContacts();
   const alert = data.find((contact) => contact.name === name);
   if (alert) {
-    console.log("\x1B[31m Contact is already !");
+    console.log("\x1B[31m Contact is already exists!");
     return null;
   }
   const contact = { id: nanoid(), name, email, phone };
