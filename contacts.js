@@ -14,12 +14,17 @@ const getContactById = async (contactId) => {
   return contact;
 };
 
-function removeContact(contactId) {
-  // ...твій код
-}
+const removeContact = async (contactId) => {
+  const data = await listContacts();
+  const contact = data.find((contact) => contact.id === contactId) || null;
+  if (!contact) return contact;
+  const resultArr = data.filter((contact) => contact.id !== contactId);
+  await fs.writeFile(contactsPath, JSON.stringify(resultArr, null, 2));
+  return contact;
+};
 
 function addContact(name, email, phone) {
   // ...твій код
 }
 
-module.exports = { listContacts, getContactById };
+module.exports = { listContacts, getContactById, removeContact };
