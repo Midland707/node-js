@@ -1,4 +1,5 @@
 const fs = require("fs").promises;
+const { nanoid } = require("nanoid");
 
 const path = require("path");
 const contactsPath = path.resolve("db", "contacts.json");
@@ -23,8 +24,17 @@ const removeContact = async (contactId) => {
   return contact;
 };
 
-function addContact(name, email, phone) {
-  // ...твій код
-}
+const addContact = async (name, email, phone) => {
+  const data = await listContacts();
+  const alert = data.find((contact) => contact.name === name);
+  if (alert) {
+    console.log("Contact is already !");
+    return null;
+  }
+  const contact = { id: nanoid(), name, email, phone };
+  const contactsArr = [...data, contact];
+  await fs.writeFile(contactsPath, JSON.stringify(contactsArr, null, 2));
+  return contactsArr;
+};
 
-module.exports = { listContacts, getContactById, removeContact };
+module.exports = { listContacts, getContactById, removeContact, addContact };
