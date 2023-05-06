@@ -1,21 +1,23 @@
 const contacts = require("./contacts");
+const argv = require("yargs").argv;
 
-const contact = {
-  name: "Kennedy Lane",
-  email: "mattis.Cras@nonenimMauris.net",
-  phone: "(542) 451-7038",
+const invokeAction = async ({ action, id, name, email, phone }) => {
+  switch (action) {
+    case "list":
+      return console.table(await contacts.listContacts());
+
+    case "get":
+      return console.table(await contacts.getContactById(id));
+
+    case "add":
+      return console.table(await contacts.addContact(name, email, phone));
+
+    case "remove":
+      return console.table(await contacts.removeContact(id));
+
+    default:
+      console.warn("\x1B[31m Unknown action type!");
+  }
 };
 
-const testFunc = async () => {
-  //   const test = await contacts.listContacts();
-  //   const test = await contacts.getContactById("drsAJ4SHPYqZeG-83QTVW");
-  //   const test = await contacts.removeContact("drsAJ4SHPYqZeG-83QTVW");
-  const test = await contacts.addContact(
-    contact.name,
-    contact.email,
-    contact.phone
-  );
-  console.log("Test drive = ", test);
-};
-
-testFunc();
+invokeAction(argv);

@@ -28,13 +28,12 @@ const addContact = async (name, email, phone) => {
   const data = await listContacts();
   const alert = data.find((contact) => contact.name === name);
   if (alert) {
-    console.log("Contact is already !");
+    console.log("\x1B[31m Contact is already !");
     return null;
   }
   const contact = { id: nanoid(), name, email, phone };
-  const contactsArr = [...data, contact];
-  await fs.writeFile(contactsPath, JSON.stringify(contactsArr, null, 2));
-  return contactsArr;
+  await fs.writeFile(contactsPath, JSON.stringify([...data, contact], null, 2));
+  return contact;
 };
 
 module.exports = { listContacts, getContactById, removeContact, addContact };
