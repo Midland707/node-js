@@ -1,36 +1,25 @@
-# node-js
+GoIT Node.js Course Template Homework
+Виконайте форк цього репозиторію для виконання домашніх завдань (2-6) Форк створить репозиторій на вашому http://github.com
 
-CLI app.
+Додайте ментора до колаборації
 
-Commands for CLI app and result screenshots.
+Для кожної домашньої роботи створюйте свою гілку.
 
-// Get list contacts
+hw02
+hw03
+hw04
+hw05
+hw06
+Кожна нова гілка для др повинна робитися з master
 
-node index.js --action="list"
+Після того, як ви закінчили виконувати домашнє завдання у своїй гілці, необхідно зробити пулл-реквест (PR). Потім додати ментора для рев'ю коду. Тільки після того, як ментор заапрувить PR, ви можете виконати мердж гілки з домашнім завданням у майстер.
 
-https://prnt.sc/fznh2RFhq7sP
+Уважно читайте коментарі ментора. Виправте зауваження та зробіть коміт у гілці з домашнім завданням. Зміни підтягнуться у PR автоматично після того, як ви відправите коміт з виправленнями на github Після виправлення знову додайте ментора на рев'ю коду.
 
-
-// Get contact by id
-
-node index.js --action="get" --id 05olLMgyVQdWRwgKfg5J6
-
-https://prnt.sc/-3aGhYIXLyQR
-
-
-// Add contact to contactList
-
-node index.js --action="add" --name Mango --email mango@gmail.com --phone 322-22-22
-
-https://prnt.sc/mxtRO4o1eU7E
-
-// Remove contact from contactList by id
-
-node index.js --action="remove" --id qdggE76Jtbfd9eWJHrssH
-
-https://prnt.sc/_DBA8GbcmvOJ
-
-
-// Result after run all comands in CLI
-
-https://prnt.sc/H4BdQ6GgOwoI
+При здачі домашньої роботи є посилання на PR
+JS-код чистий та зрозумілий, для форматування використовується Prettier
+Команди:
+npm start — старт сервера в режимі production
+npm run start:dev — старт сервера в режимі розробки (development)
+npm run lint — запустити виконання перевірки коду з eslint, необхідно виконувати перед кожним PR та виправляти всі помилки лінтера
+npm lint:fix — та ж перевірка лінтера, але з автоматичними виправленнями простих помилок
