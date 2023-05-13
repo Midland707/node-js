@@ -20,4 +20,4 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message });
 });
 
-app.listen(2500);
+module.exports = app;
