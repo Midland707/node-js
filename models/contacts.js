@@ -24,15 +24,13 @@ const removeContact = async (contactId) => {
   return contact;
 };
 
-const addContact = async (name, email, phone) => {
-  const data = await listContacts();
-  const alert = data.find((contact) => contact.name === name);
-  if (alert) {
-    console.log("\x1B[31m Contact is already exists!");
-    return null;
-  }
-  const contact = { id: nanoid(), name, email, phone };
-  await fs.writeFile(contactsPath, JSON.stringify([...data, contact], null, 2));
+const addContact = async (data) => {
+  const contacts = await listContacts();
+  const contact = { id: nanoid(), ...data };
+  await fs.writeFile(
+    contactsPath,
+    JSON.stringify([...contacts, contact], null, 2)
+  );
   return contact;
 };
 
