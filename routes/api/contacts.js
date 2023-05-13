@@ -57,4 +57,19 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
+router.put("/:id", async (req, res, next) => {
+  try {
+    if (JSON.stringify(req.body) === "{}")
+      throw HttpError(400, "missing fields");
+    const { error } = addContactSchema.validate(req.body);
+    if (error) throw HttpError(400, error.message);
+    const { id } = req.params;
+    const result = await contacts.editContact(id, req.body);
+    if (!result) throw HttpError(404);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
