@@ -28,9 +28,7 @@ router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const result = await contacts.getContactById(id);
-    if (!result) {
-      throw HttpError(404);
-    }
+    if (!result) throw HttpError(404);
     res.json(result);
   } catch (error) {
     next(error);
@@ -43,6 +41,17 @@ router.post("/", async (req, res, next) => {
     if (error) throw HttpError(400, error.message);
     const result = await contacts.addContact(req.body);
     res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await contacts.removeContact(id);
+    if (!result) throw HttpError(404);
+    res.json({ message: "contact deleted" });
   } catch (error) {
     next(error);
   }

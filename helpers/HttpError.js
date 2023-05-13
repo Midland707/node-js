@@ -1,6 +1,6 @@
 const messages = {
   400: "Bad Request",
-  404: "Not Found",
+  404: "Not found",
 };
 
 const HttpError = (status, message = messages[status]) => {
