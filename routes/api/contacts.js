@@ -1,64 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const contacts = require("../../models/contacts");
-const { HttpError } = require("../../helpers");
 
-const addContactSchema = require("../../schemas/contacts-schemas");
+const contactsController = require("../../controllers/contacts-controller");
 
-router.get("/", async (req, res, next) => {
-  try {
-    res.json(await contacts.listContacts());
-  } catch (error) {
-    next(error);
-  }
-});
+router.get("/", contactsController.getListContacts);
 
-router.get("/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const result = await contacts.getContactById(id);
-    if (!result) throw HttpError(404);
-    res.json(result);
-  } catch (error) {
-    next(error);
-  }
-});
+router.get("/:id", contactsController.getContactById);
 
-router.post("/", async (req, res, next) => {
-  try {
-    const { error } = addContactSchema.validate(req.body);
-    if (error) throw HttpError(400, error.message);
-    const result = await contacts.addContact(req.body);
-    res.status(201).json(result);
-  } catch (error) {
-    next(error);
-  }
-});
+router.post("/", contactsController.addContact);
 
-router.delete("/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const result = await contacts.removeContact(id);
-    if (!result) throw HttpError(404);
-    res.json({ message: "contact deleted" });
-  } catch (error) {
-    next(error);
-  }
-});
+router.delete("/:id", contactsController.removeContact);
 
-router.put("/:id", async (req, res, next) => {
-  try {
-    if (JSON.stringify(req.body) === "{}")
-      throw HttpError(400, "missing fields");
-    const { error } = addContactSchema.validate(req.body);
-    if (error) throw HttpError(400, error.message);
-    const { id } = req.params;
-    const result = await contacts.editContact(id, req.body);
-    if (!result) throw HttpError(404);
-    res.json(result);
-  } catch (error) {
-    next(error);
-  }
-});
+router.put("/:id", contactsController.editContact);
 
 module.exports = router;
