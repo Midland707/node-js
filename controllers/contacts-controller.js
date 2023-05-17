@@ -26,20 +26,20 @@ const removeContact = async (req, res, next) => {
   res.json({ message: "contact deleted" });
 };
 
-// const editContact = async (req, res, next) => {
-//   if (JSON.stringify(req.body) === "{}") throw HttpError(400, "missing fields");
-//   const { error } = addContactSchema.validate(req.body);
-//   if (error) throw HttpError(400, error.message);
-//   const { id } = req.params;
-//   const result = await contacts.editContact(id, req.body);
-//   if (!result) throw HttpError(404);
-//   res.json(result);
-// };
+const editContact = async (req, res, next) => {
+  if (JSON.stringify(req.body) === "{}") throw HttpError(400, "missing fields");
+  const { id } = req.params;
+  const result = await Contact.findByIdAndUpdate({ _id: id }, req.body, {
+    new: true,
+  });
+  if (!result) throw HttpError(404);
+  res.json(result);
+};
 
 module.exports = {
   getListContacts: controllerWrapper(getListContacts),
   getContactById: controllerWrapper(getContactById),
   addContact: controllerWrapper(addContact),
   removeContact: controllerWrapper(removeContact),
-  // editContact: controllerWrapper(editContact),
+  editContact: controllerWrapper(editContact),
 };
