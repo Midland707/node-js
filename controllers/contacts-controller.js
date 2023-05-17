@@ -7,12 +7,12 @@ const getListContacts = async (req, res, next) => {
   res.json(await Contact.find());
 };
 
-// const getContactById = async (req, res, next) => {
-//   const { id } = req.params;
-//   const result = await contacts.getContactById(id);
-//   if (!result) throw HttpError(404);
-//   res.json(result);
-// };
+const getContactById = async (req, res, next) => {
+  const { id } = req.params;
+  const result = await Contact.findOne({ _id: id });
+  if (!result) throw HttpError(404);
+  res.json(result);
+};
 
 // const addContact = async (req, res, next) => {
 //   const { error } = addContactSchema.validate(req.body);
@@ -40,7 +40,7 @@ const getListContacts = async (req, res, next) => {
 
 module.exports = {
   getListContacts: controllerWrapper(getListContacts),
-  // getContactById: controllerWrapper(getContactById),
+  getContactById: controllerWrapper(getContactById),
   // addContact: controllerWrapper(addContact),
   // removeContact: controllerWrapper(removeContact),
   // editContact: controllerWrapper(editContact),
