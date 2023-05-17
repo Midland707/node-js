@@ -14,12 +14,10 @@ const getContactById = async (req, res, next) => {
   res.json(result);
 };
 
-// const addContact = async (req, res, next) => {
-//   const { error } = addContactSchema.validate(req.body);
-//   if (error) throw HttpError(400, error.message);
-//   const result = await contacts.addContact(req.body);
-//   res.status(201).json(result);
-// };
+const addContact = async (req, res, next) => {
+  const result = await Contact.create(req.body);
+  res.status(201).json(result);
+};
 
 // const removeContact = async (req, res, next) => {
 //   const { id } = req.params;
@@ -41,7 +39,7 @@ const getContactById = async (req, res, next) => {
 module.exports = {
   getListContacts: controllerWrapper(getListContacts),
   getContactById: controllerWrapper(getContactById),
-  // addContact: controllerWrapper(addContact),
+  addContact: controllerWrapper(addContact),
   // removeContact: controllerWrapper(removeContact),
   // editContact: controllerWrapper(editContact),
 };
