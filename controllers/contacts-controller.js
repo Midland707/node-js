@@ -19,12 +19,12 @@ const addContact = async (req, res, next) => {
   res.status(201).json(result);
 };
 
-// const removeContact = async (req, res, next) => {
-//   const { id } = req.params;
-//   const result = await contacts.removeContact(id);
-//   if (!result) throw HttpError(404);
-//   res.json({ message: "contact deleted" });
-// };
+const removeContact = async (req, res, next) => {
+  const { id } = req.params;
+  const result = await Contact.findByIdAndRemove({ _id: id });
+  if (!result) throw HttpError(404);
+  res.json({ message: "contact deleted" });
+};
 
 // const editContact = async (req, res, next) => {
 //   if (JSON.stringify(req.body) === "{}") throw HttpError(400, "missing fields");
@@ -40,6 +40,6 @@ module.exports = {
   getListContacts: controllerWrapper(getListContacts),
   getContactById: controllerWrapper(getContactById),
   addContact: controllerWrapper(addContact),
-  // removeContact: controllerWrapper(removeContact),
+  removeContact: controllerWrapper(removeContact),
   // editContact: controllerWrapper(editContact),
 };

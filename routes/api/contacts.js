@@ -9,7 +9,7 @@ router.get("/:id", contactsController.getContactById);
 
 router.post("/", contactsController.addContact);
 
-// router.delete("/:id", contactsController.removeContact);
+router.delete("/:id", contactsController.removeContact);
 
 // router.put("/:id", contactsController.editContact);
 
