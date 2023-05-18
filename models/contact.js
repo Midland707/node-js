@@ -28,8 +28,13 @@ const addSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string(),
   phone: Joi.string(),
+  favorite: Joi.boolean(),
 });
+
+const schemas = {
+  addSchema,
+};
 
 const Contact = model("contacts", contactSchema);
 
-module.exports = Contact;
+module.exports = { Contact, schemas };
