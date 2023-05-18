@@ -24,4 +24,11 @@ router.put(
   contactsController.editContact
 );
 
+router.patch(
+  "/:id/favorite",
+  isValidId,
+  validateBody(schemas.updateFavoriteSchema),
+  contactsController.editContact
+);
+
 module.exports = router;

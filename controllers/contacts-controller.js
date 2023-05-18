@@ -36,10 +36,20 @@ const editContact = async (req, res) => {
   res.json(result);
 };
 
+const setFavorite = async (req, res) => {
+  const { id } = req.params;
+  const result = await Contact.findByIdAndUpdate({ _id: id }, req.body, {
+    new: true,
+  });
+  if (!result) throw HttpError(404);
+  res.json(result);
+};
+
 module.exports = {
   getListContacts: controllerWrapper(getListContacts),
   getContactById: controllerWrapper(getContactById),
   addContact: controllerWrapper(addContact),
   removeContact: controllerWrapper(removeContact),
   editContact: controllerWrapper(editContact),
+  setFavorite: controllerWrapper(setFavorite),
 };
