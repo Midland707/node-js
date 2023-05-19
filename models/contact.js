@@ -25,14 +25,18 @@ const contactSchema = new Schema(
 contactSchema.post("save", mongooseError);
 
 const addSchema = Joi.object({
-  name: Joi.string().required(),
+  name: Joi.string()
+    .required()
+    .messages({ "any.required": "missing required name field" }),
   email: Joi.string(),
   phone: Joi.string(),
   favorite: Joi.boolean(),
 });
 
 const updateFavoriteSchema = Joi.object({
-  favorite: Joi.boolean().required(),
+  favorite: Joi.boolean()
+    .required()
+    .messages({ "any.required": "missing field favorite" }),
 });
 
 const schemas = {
