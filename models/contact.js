@@ -4,24 +4,19 @@ const Joi = require("joi");
 
 const contactSchema = new Schema(
   {
-    password: {
+    name: {
       type: String,
-      required: [true, "Set password for user"],
+      required: [true, "Set name for contact"],
     },
     email: {
       type: String,
-      required: [true, "Email is required"],
-      unique: true,
     },
-    subscription: {
+    phone: {
       type: String,
-      enum: ["starter", "pro", "business"],
-      default: "starter",
     },
-    token: String,
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
+    favorite: {
+      type: Boolean,
+      default: false,
     },
   },
   { versionKey: false }
