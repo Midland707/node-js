@@ -1,11 +1,9 @@
-const { controllerWrapper } = require("../decorators");
-const addContactSchema = require("../schemas/contacts-schemas");
 const { HttpError } = require("../helpers");
-const { Contact } = require("../models/contact");
+const { Contact } = require("../models");
 
-const getListContacts = async (req, res) => {
-  res.json(await Contact.find());
-};
+// const getListContacts = async (req, res) => {
+//   res.json(await Contact.find());
+// };
 
 const getContactById = async (req, res) => {
   const { id } = req.params;
