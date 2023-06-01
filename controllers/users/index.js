@@ -1,5 +1,7 @@
-const { getAllUsers } = require("./getAllUsers");
+const { controllerWrapper } = require("../../decorators");
+
+const registerUser = require("./registerUser");
 
 module.exports = {
-  getAllUsers,
+  registerUser: controllerWrapper(registerUser),
 };

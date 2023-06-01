@@ -24,8 +24,10 @@ const userSchema = new Schema(
       ref: "users",
     },
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: true }
 );
+
+userSchema.post("save", mongooseError);
 
 const User = model("user", userSchema);
 
