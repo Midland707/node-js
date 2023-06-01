@@ -21,7 +21,7 @@ const userSchema = new Schema(
     token: String,
     owner: {
       type: Schema.Types.ObjectId,
-      ref: "users",
+      ref: "user",
     },
   },
   { versionKey: false, timestamps: true }
