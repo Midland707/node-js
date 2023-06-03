@@ -3,6 +3,7 @@ const { mongooseError } = require("../helpers");
 const Joi = require("joi");
 
 const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const subList = ["starter", "pro", "business"];
 
 const userSchema = new Schema(
   {
@@ -19,7 +20,7 @@ const userSchema = new Schema(
     },
     subscription: {
       type: String,
-      enum: ["starter", "pro", "business"],
+      enum: subList,
       default: "starter",
     },
     token: String,
@@ -35,7 +36,9 @@ const regLogSchema = Joi.object({
 });
 
 const updateSubSchema = Joi.object({
-  subscription: Joi.string().required(),
+  subscription: Joi.string()
+    .valid(...subList)
+    .required(),
 });
 
 const schemasUser = { regLogSchema, updateSubSchema };
