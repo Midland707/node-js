@@ -34,6 +34,12 @@ const regLogSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
 });
 
+const updateSubSchema = Joi.object({
+  subscription: Joi.string().required(),
+});
+
+const schemasUser = { regLogSchema, updateSubSchema };
+
 const User = model("user", userSchema);
 
-module.exports = { User, regLogSchema };
+module.exports = { User, schemasUser };
