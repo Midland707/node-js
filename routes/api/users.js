@@ -9,7 +9,11 @@ router.post(
   validateBody(schemasUser.regLogSchema),
   usersController.registerUser
 );
-// router.post("/login", usersController.loginUser);
+router.post(
+  "/login",
+  validateBody(schemasUser.regLogSchema),
+  usersController.loginUser
+);
 // router.post("/logout", usersController.logoutUser);
 // router.post("/current", usersController.currentUser);
 
