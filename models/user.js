@@ -42,7 +42,11 @@ const updateSubSchema = Joi.object({
     .required(),
 });
 
-const schemasUser = { regLogSchema, updateSubSchema };
+const updateAvatarSchema = Joi.object({
+  avatarURL: Joi.string().required(),
+});
+
+const schemasUser = { regLogSchema, updateSubSchema, updateAvatarSchema };
 
 const User = model("user", userSchema);
 

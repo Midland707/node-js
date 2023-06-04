@@ -22,5 +22,11 @@ router.patch(
   validateBody(schemasUser.updateSubSchema),
   usersController.updateSubUser
 );
+router.patch(
+  "/avatars",
+  auth,
+  validateBody(schemasUser.updateAvatarSchema),
+  usersController.updateAvatar
+);
 
 module.exports = router;
