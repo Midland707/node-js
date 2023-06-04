@@ -97,6 +97,19 @@ ResponseBody: {
 @ PATCH /users - Оновлення підписки (subscription) користувача.
 Підписка повинна мати одне з наступних значень ['starter', 'pro', 'business'].
 
+@ PATCH /users/avatars - Оновлення картинки аватара користувача.
+Content-Type: multipart/form-data
+Authorization: "Bearer {{token}}"
+RequestBody: завантажений файл
+
+Status: 200 OK
+ResponseBody: {
+  "avatarURL": "тут буде посилання на зображення"
+}
+
+EXPRESS.STATIC
+http://locahost:<порт>/avatars/<ім'я файлу з розширенням>
+
 RUN
 npm start — старт сервера в режимі production
 
