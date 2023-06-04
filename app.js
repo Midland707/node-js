@@ -4,13 +4,17 @@ const cors = require("cors");
 const contactsRouter = require("./routes/api/contacts");
 const usersRouter = require("./routes/api/users");
 require("dotenv").config();
-
+const path = require("path");
+const avatarsPath = path.resolve("public", "avatars");
+console.log("avatarsPath =", avatarsPath);
 const app = express();
 
 app.use(morgan("combined"));
 app.use(cors());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.use("/avatars", express.static(avatarsPath));
 app.use("/api/contacts", contactsRouter);
 app.use("/users", usersRouter);
 
