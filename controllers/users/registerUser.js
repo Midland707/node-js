@@ -2,6 +2,8 @@ const { User } = require("../../models");
 const { HttpError } = require("../../helpers");
 const bcrypt = require("bcrypt");
 var gravatar = require("gravatar");
+const nanoid = require("nanoid");
+const { PROJECT_URL, PORT } = process.env;
 
 const registerUser = async (req, res) => {
   const { email, password } = req.body;
@@ -14,11 +16,24 @@ const registerUser = async (req, res) => {
     throw HttpError(409, "Email in use");
   }
   const hashPassw = await bcrypt.hash(password, 10);
+
+  const verificationCode = nanoid();
+
   const newUser = await User.create({
     ...req.body,
     password: hashPassw,
     avatarURL,
+    verificationCode,
   });
+
+  const verifyEmail = {
+    to: email,
+    subject: "Verify email",
+    html: `<a target="_blank" href="${PROJECT_URL}:${PORT}/users/verify/${verificationCode}">Click to verify email</a>`,
+  };
+
+  await sendEmail(verifyEmail);
+
   res.status(201).json({
     user: {
       email: newUser.email,

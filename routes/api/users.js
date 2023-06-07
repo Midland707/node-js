@@ -9,6 +9,7 @@ router.post(
   validateBody(schemasUser.regLogSchema),
   usersController.registerUser
 );
+// router.get("/ver");
 router.post(
   "/login",
   validateBody(schemasUser.regLogSchema),
