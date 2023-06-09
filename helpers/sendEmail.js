@@ -1,4 +1,5 @@
 const Mailjet = require("node-mailjet");
+require("dotenv").config();
 const { MJ_APIKEY_PUBLIC, MJ_APIKEY_PRIVATE, MJ_SENDER_EMAIL } = process.env;
 
 const mailjet = new Mailjet({
@@ -7,6 +8,7 @@ const mailjet = new Mailjet({
 });
 
 const sendEmail = async (data) => {
+  console.log(mailjet.apiKey);
   await mailjet.post("send", { version: "v3.1" }).request({
     Messages: [
       {

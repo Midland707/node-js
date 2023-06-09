@@ -2,8 +2,9 @@ const { User } = require("../../models");
 const { HttpError } = require("../../helpers");
 const bcrypt = require("bcrypt");
 var gravatar = require("gravatar");
-const nanoid = require("nanoid");
+const { nanoid } = require("nanoid");
 const { PROJECT_URL, PORT } = process.env;
+const { sendEmail } = require("../../helpers");
 
 const registerUser = async (req, res) => {
   const { email, password } = req.body;
@@ -17,19 +18,19 @@ const registerUser = async (req, res) => {
   }
   const hashPassw = await bcrypt.hash(password, 10);
 
-  const verificationCode = nanoid();
+  const verificationToken = nanoid();
 
   const newUser = await User.create({
     ...req.body,
     password: hashPassw,
     avatarURL,
-    verificationCode,
+    verificationToken,
   });
 
   const verifyEmail = {
     to: email,
     subject: "Verify email",
-    html: `<a target="_blank" href="${PROJECT_URL}:${PORT}/users/verify/${verificationCode}">Click to verify email</a>`,
+    html: `<a target="_blank" href="${PROJECT_URL}:${PORT}/users/verify/${verificationToken}">Click to verify email</a>`,
   };
 
   await sendEmail(verifyEmail);
