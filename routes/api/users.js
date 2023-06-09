@@ -9,7 +9,7 @@ router.post(
   validateBody(schemasUser.regLogSchema),
   usersController.registerUser
 );
-// router.get("/ver");
+router.get("/verify/:verificationToken", usersController.verificationUser);
 router.post(
   "/login",
   validateBody(schemasUser.regLogSchema),

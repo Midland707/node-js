@@ -6,6 +6,7 @@ const logoutUser = require("./logoutUser");
 const currentUser = require("./currentUser");
 const updateSubUser = require("./updateSubUser");
 const updateAvatar = require("./updateAvatar");
+const verificationUser = require("./verificationUser");
 
 module.exports = {
   registerUser: controllerWrapper(registerUser),
@@ -14,4 +15,5 @@ module.exports = {
   currentUser: controllerWrapper(currentUser),
   updateSubUser: controllerWrapper(updateSubUser),
   updateAvatar: controllerWrapper(updateAvatar),
+  verificationUser: controllerWrapper(verificationUser),
 };
