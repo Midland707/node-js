@@ -7,7 +7,7 @@ const sendToEmail = async (email) => {
   const verifyEmail = {
     to: email,
     subject: "Verify email",
-    html: `<a target="_blank" href="${PROJECT_URL}:${PORT}/users/verify/${verificationToken}">Click to verify email</a>`,
+    html: `<a target="_blank" href="${PROJECT_URL}${PORT}/users/verify/${verificationToken}">Click to verify email</a>`,
   };
   await sendEmail(verifyEmail);
   return verificationToken;
