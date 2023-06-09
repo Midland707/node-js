@@ -9,7 +9,15 @@ const resendEmailToUser = async (req, res) => {
   if (result.verify) {
     throw HttpError(400, "Verification has already been passed");
   }
-  await sendToEmail(email);
+  const verificationToken = await sendToEmail(email);
+  const { _id } = result;
+  await User.findOneAndUpdate(
+    { _id },
+    { ...req.body, verificationToken },
+    {
+      new: true,
+    }
+  );
   res.json({
     message: "Verification email sent",
   });
