@@ -110,6 +110,45 @@ ResponseBody: {
 EXPRESS.STATIC
 http://locahost:<порт>/avatars/<ім'я файлу з розширенням>
 
+--==-- Nodemailer Verification: --==--
+@ GET /users/verify/:verificationToken
+Verification success response
+Status: 200 OK
+ResponseBody: {
+  message: 'Verification successful',
+}
+Verification user Not Found
+Status: 404 Not Found
+ResponseBody: {
+  message: 'User not found'
+}
+
+Повторна відправка email користувачу з посиланням для верифікації
+@ POST /users/verify
+Resending a email request
+POST /users/verify
+Content-Type: application/json
+RequestBody: {
+  "email": "example@example.com"
+}
+
+Якщо в body немає обов'язкового поля email
+Status: 400 Bad Request
+ResponseBody: {
+  message:"missing required field email"
+}
+Якщо користувач вже пройшов верифікацію
+Status: 400 Bad Request
+ResponseBody: {
+  message:"Verification has already been passed"
+}
+Resending a email success response
+Status: 200 Ok
+Content-Type: application/json
+ResponseBody: {
+  "message": "Verification email sent"
+}
+
 RUN
 npm start — старт сервера в режимі production
 
