@@ -10,6 +10,7 @@ router.post(
   usersController.registerUser
 );
 router.get("/verify/:verificationToken", usersController.verificationUser);
+router.post("/verify", usersController.resendEmailToUser);
 router.post(
   "/login",
   validateBody(schemasUser.regLogSchema),
